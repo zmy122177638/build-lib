@@ -33,11 +33,11 @@
   "dependencies": {},
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "packages/**/*.(ts,js)": [
+    "*.{ts,js}": [
       "eslint",
       "git add"
     ]
