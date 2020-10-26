@@ -1,4 +1,4 @@
-# 手把手教你如何 rollup 打包 ts 工具库
+# 手把手教你如何使用 rollup 打包 ts 工具库
 
 ## 新建项目及工具库结构
 
@@ -141,7 +141,7 @@ import typescript from "rollup-plugin-typescript2";
 
 支持 ts 了，我们需要配置 ts 的一些规则，记得我们安装了 typescript 包，这个时候就要用到它了，运行`npx tsc --init`,会自动创建[tsconfig.json](https://www.tslang.cn/docs/handbook/tsconfig-json.html)文件，npx 是运行 node_modules 内置包的命令，tsc 是 typescript 的命令.
 
-```json
+```js
 {
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
