@@ -113,7 +113,7 @@ export default {
 "scripts": {
   "test": "echo \"Error: no test specified\" && exit 1",
   "build:utils": "rollup -c",
-  "start": "rollup -w"
+  "start": "rollup -w -c"
 }
 ```
 
@@ -148,15 +148,16 @@ import typescript from "rollup-plugin-typescript2";
 
     /* Basic Options */
     // "incremental": true,                   /* Enable incremental compilation */
-    "target": "esnext" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
-    "module": "esnext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
+    "target": "esnext",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */
+    "module": "esnext",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
     // "lib": [],                             /* Specify library files to be included in the compilation. */
     // "allowJs": true,                       /* Allow javascript files to be compiled. */
     // "checkJs": true,                       /* Report errors in .js files. */
     // "jsx": "preserve",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
-    // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
+    "declaration": true,                   /* Generates corresponding '.d.ts' file. */
+    "declarationDir": "lib/types",
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
-    // "sourceMap": true,                     /* Generates corresponding '.map' file. */
+    "sourceMap": true,                     /* Generates corresponding '.map' file. */
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
     // "outDir": "./",                        /* Redirect output structure to the directory. */
     // "rootDir": "./",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
@@ -169,7 +170,7 @@ import typescript from "rollup-plugin-typescript2";
     // "isolatedModules": true,               /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
 
     /* Strict Type-Checking Options */
-    "strict": true /* Enable all strict type-checking options. */,
+    "strict": true,                           /* Enable all strict type-checking options. */
     // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
     // "strictNullChecks": true,              /* Enable strict null checks. */
     // "strictFunctionTypes": true,           /* Enable strict checking of function types. */
@@ -192,7 +193,7 @@ import typescript from "rollup-plugin-typescript2";
     // "typeRoots": [],                       /* List of folders to include type definitions from. */
     // "types": [],                           /* Type declaration files to be included in compilation. */
     // "allowSyntheticDefaultImports": true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
-    "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
+    "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     // "preserveSymlinks": true,              /* Do not resolve the real path of symlinks. */
     // "allowUmdGlobalAccess": true,          /* Allow accessing UMD globals from modules. */
 
@@ -200,18 +201,27 @@ import typescript from "rollup-plugin-typescript2";
     // "sourceRoot": "",                      /* Specify the location where debugger should locate TypeScript files instead of source locations. */
     // "mapRoot": "",                         /* Specify the location where debugger should locate map files instead of generated locations. */
     // "inlineSourceMap": true,               /* Emit a single file with source maps instead of having a separate file. */
-    // "inlineSources": true,                 /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */
+    "inlineSources": true,                 /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */
 
     /* Experimental Options */
     // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
 
     /* Advanced Options */
-    "skipLibCheck": true /* Skip type checking of declaration files. */,
-    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+    "skipLibCheck": true,                     /* Skip type checking of declaration files. */
+    "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
-  "include": ["packages/**/*.ts", "packages/**/*.tsx", ".eslintrc.js", "rollup.config.js"],
-  "exclude": ["node_modules"]
+  "include": [
+    "packages/**/*.ts",
+    "packages/**/*.js",
+    "rollup.config.js",
+    ".eslintrc.js",
+    "lib/**.js",
+    "lib/**.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
 ```
 
@@ -336,20 +346,124 @@ module.exports = {
 
 ## husky、lint-staged
 
-- [husky](https://www.npmjs.com/package/husky)
-- [lint-staged](https://www.npmjs.com/package/lint-staged)
-
-husky 可以防止使用 Git hooks 的一些不好的 commit 或者 push。
-
-lint-staged 是一个在 git 暂存文件上运行后置命令的工具。
+- [husky](https://www.npmjs.com/package/husky)  可以防止使用 Git hooks 的一些不好的 commit 或者 push
+- [lint-staged](https://www.npmjs.com/package/lint-staged) 是一个在 git 暂存文件上运行命令的工具。
 
 安装 `npm i -D husky lint-staged`
 
 修改`package.json`
 
+```json
+"scripts": {
+  "lint": "eslint packages --ext .ts,.js"
+},
+"husky": {
+  "hooks": {
+    "pre-commit": "lint-staged"
+  }
+},
+"lint-staged": {
+  "*.{ts,js}": [
+    "eslint --fix",
+    "git add"
+  ]
+}
 ```
+## 压缩、配置scripts
+- [rimraf](https://www.npmjs.com/package/rimraf) 文件删除工具，用于每次编译前清空 lib 目录
+- [npm-run-all](https://www.npmjs.com/package/npm-run-all) npm 命令并行执行工具
+- [rollup-plugin-uglify](https://www.npmjs.com/package/rollup-plugin-uglify) uglify js 压缩工具（rollup 版）
+- [lodash.merge](https://www.npmjs.com/package/lodash.merge) 配置合并工具
+1. 安装依赖
+```cmd
+npm i -D rimraf npm-run-all rollup-plugin-uglify lodash.merge
+```
+2. 修改`rollup.config.js`
+```js
+import babel from 'rollup-plugin-babel'
+import typescript from 'rollup-plugin-typescript2'
+import resolve from 'rollup-plugin-node-resolve'
+import { uglify } from 'rollup-plugin-uglify'
+import merge from 'lodash.merge'
+import path from 'path'
+import pkg from './package.json'
 
+const extensions = ['.js', '.ts']
+const pathResolve = function (...args) {
+  return path.resolve(__dirname, ...args)
+}
+// 打包任务的个性化配置
+const jobs = {
+  esm: {
+    output: {
+      format: 'esm',
+      file: pathResolve(pkg.module),
+    },
+  },
+  umd: {
+    output: {
+      format: 'umd',
+      file: pathResolve(pkg.main),
+    },
+  },
+  min: {
+    output: {
+      format: 'umd',
+      file: pathResolve(pkg.main.replace(/(.\w+)$/, '.min$1')),
+    },
+    plugins: [uglify()],
+  },
+}
+
+// 从环境变量获取打包特征
+const mergeConfig = jobs[process.env.NODE_ENV || 'esm']
+
+export default merge(
+  {
+    input: 'packages/utils/index.ts',
+    output: {
+      file: 'lib/index.js',
+      format: 'umd',
+      name: '@anles/utils',
+    },
+    plugins: [
+      resolve({
+        extensions,
+        modulesOnly: true,
+      }),
+      typescript({
+        useTsconfigDeclarationDir: true,
+      }),
+      babel({
+        exclude: 'node_modules/**',
+        extensions,
+      }),
+    ],
+  },
+  mergeConfig,
+)
 ```
+3. `package.json`添加命令
+```json
+"main": "lib/index.umd.js",
+"module": "lib/index.esm.js",
+"module": "lib/types/index.d.js",
+"scripts": {
+  "lint": "eslint 'src/**/*.{js,ts}'",
+  "dev": "rollup -w -c --environment NODE_ENV:esm",
+  "build:esm": "rollup -c --environment NODE_ENV:esm",
+  "build:umd": "rollup -c --environment NODE_ENV:umd",
+  "build:min": "rollup -c --environment NODE_ENV:min",
+  "build": "rimraf lib/* && run-p build:esm build:umd build:min"
+},
+```
+运行`npm run build`会同时执行三个子编译任务，分别是：
+- build:esm - 编译出符合 esm 规范的可执行文件，供 Vue、React 等采用 esmodule 规范进行模块化打包的项目使用
+- build:umd - 编译出符合 umd 规范的可执行文件，供 jQuery、Vue、NodeJS 等项目使用
+- build:min - 编译出符合 umd 规范的压缩的可执行文件
+
+## 发布npm
+
 
 ## 参考文献
 

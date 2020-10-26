@@ -1,7 +1,5 @@
 /** 导出模块所有方法 */
-// export * from "./modules/format"
-/** 指定导出方法 */
-export { formatDate, formatNumber } from './modules/format'
+export * from './modules/format'
 
 import { formatDate } from './modules/format'
 
