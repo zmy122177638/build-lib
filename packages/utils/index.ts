@@ -5,7 +5,7 @@ export { formatDate, formatNumber } from './modules/format'
 
 import { formatDate } from './modules/format'
 
-export function testBuildTarget    () {
+export function testBuildTarget() {
   const testconstOfVar = 'YYYY-MM-DD'
   return () => formatDate(new Date(), testconstOfVar)
 }
