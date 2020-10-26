@@ -1,5 +1,5 @@
 {
-  "name": "build-lib",
+  "name": "build-lib-template",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.umd.js",
