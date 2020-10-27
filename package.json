@@ -1,6 +1,6 @@
 {
   "name": "@anles/utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "一个在项目中非常实用的工具包，支持ts类型验证",
   "main": "lib/index.umd.js",
   "module": "lib/index.esm.js",
@@ -22,7 +22,7 @@
     "anles-utils"
   ],
   "author": "anles<122177638@qq.com>",
-  "license": "MIS",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
