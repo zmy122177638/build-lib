@@ -1,10 +1,11 @@
 {
-  "name": "build-lib-template",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@anles/utils",
+  "version": "1.0.1",
+  "description": "一个在项目中非常实用的工具包，支持ts类型验证",
   "main": "lib/index.umd.js",
   "module": "lib/index.esm.js",
   "types": "lib/types/index.d.ts",
+  "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "rollup -c -w",
@@ -14,9 +15,14 @@
     "build": "rimraf lib/* && run-p build:esm build:umd build:min",
     "lint": "eslint packages --ext .ts,.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "@anles",
+    "anles",
+    "@anles/utils",
+    "anles-utils"
+  ],
+  "author": "anles<122177638@qq.com>",
+  "license": "MIS",
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
@@ -40,6 +46,11 @@
     "typescript": "^4.0.3"
   },
   "dependencies": {},
+  "files": [
+    "lib/",
+    "package.json",
+    "README.md"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

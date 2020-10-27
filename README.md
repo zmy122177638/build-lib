@@ -463,7 +463,16 @@ export default merge(
 - build:min - 编译出符合 umd 规范的压缩的可执行文件
 
 ## 发布npm
-
+1. `npm login`登录npm，没有的话去[npm](https://www.npmjs.com/)注册一个。
+2. 配置packages的`files`字段,表示上传哪些文件到npm, 也可以使用`.npmignore`文件来过滤不上传的文件，建议还是使用`files`来表示，据说git也会识别`.npmignore`文件,这样会造成版本库和npm包上传冲突。
+```json
+"files": [
+  "lib/",
+  "package.json",
+  "README.md"
+],
+```
+3. `npm publish`发布并上传至npm, 需要注意的是，每次发布都需要更改`package.json`的`version`的[版本号](https://segmentfault.com/a/1190000011368506?utm_source=tag-newest), 另外在上传名字前缀为@\*/\*`(例如@anles/utils)`时, 需要追加`npm publish --access public`,因为npm默认将带有前缀@\*/\*的包名，做为私有包，所以你没有私有包的权限是上传不了的。现在我们指定了它不是私有，因此它成功的上传了。
 
 ## 参考文献
 
