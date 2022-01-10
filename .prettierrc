@@ -5,5 +5,11 @@
   "singleQuote": true,
   "endOfLine": "auto",
   "quoteProps": "as-needed",
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "useTabs": false,
+  "parser": "typescript",
+  "noSemi": true,
+  "rcVerbose": true,
+  "bracketSpacing": true,
+  "arrowParens": "avoid"
 }

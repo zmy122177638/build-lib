@@ -70,10 +70,6 @@
   "include": [
     "packages/**/*.ts",
     "packages/**/*.js",
-    "rollup.config.js",
-    ".eslintrc.js",
-    "lib/**.js",
-    "lib/**.ts",
   ],
   "exclude": [
     "node_modules"

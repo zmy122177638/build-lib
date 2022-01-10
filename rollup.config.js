@@ -42,7 +42,7 @@ export default merge(
     output: {
       file: 'lib/index.js',
       format: 'umd',
-      name: '@anles/utils',
+      name: 'mocc-utils',
     },
     plugins: [
       resolve({

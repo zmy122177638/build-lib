@@ -1,2 +1,5 @@
 node_modules
 lib
+commitlint.config.js
+.eslintrc.js
+rollup.config.js

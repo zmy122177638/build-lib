@@ -1,7 +1,7 @@
 {
-  "name": "@anles/utils",
-  "version": "1.0.2",
-  "description": "一个在项目中非常实用的工具包，支持ts类型验证",
+  "name": "mocc-utils",
+  "version": "0.1.0",
+  "description": "一个实用的前端工具库",
   "main": "lib/index.umd.js",
   "module": "lib/index.esm.js",
   "types": "lib/types/index.d.ts",
@@ -16,10 +16,9 @@
     "lint": "eslint packages --ext .ts,.js"
   },
   "keywords": [
-    "@anles",
-    "anles",
-    "@anles/utils",
-    "anles-utils"
+    "mocc-utils",
+    "mocc",
+    "moc-cloud"
   ],
   "author": "anles<122177638@qq.com>",
   "license": "MIT",
@@ -27,6 +26,8 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-conventional": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "eslint": "^7.11.0",
@@ -53,7 +54,8 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
